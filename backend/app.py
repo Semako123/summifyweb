@@ -1,9 +1,11 @@
 import requests, re
 from bs4 import BeautifulSoup
-from transformers import pipeline
+from dotenv import load_dotenv, find_dotenv
+import os
 
+load_dotenv(find_dotenv())
 url = input("url: ")
-
+HUGGING_FACE_TOKEN = os.getenv("HUGGING_FACE_TOKEN")
 def fetch_data(url):
     data = requests.get(url)
     return data.text
@@ -24,8 +26,3 @@ def extract_data(html_data):
 
 html_data = fetch_data(url)
 data = extract_data(html_data)
-print(data)
-
-
-def summarize(text):
-    pass
